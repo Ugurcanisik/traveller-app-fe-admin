@@ -10,7 +10,7 @@
           <div class="info">
             <a data-toggle="collapse" href="" aria-expanded="true">
 								<span>
-									Gözde Bayru
+									{{ user.userName + " " + user.lastName }}
 								</span>
             </a>
             <div class="clearfix"></div>

@@ -3,39 +3,38 @@
     <div class="modal-content">
       <div class="modal-body">
 
-        <!--
-                <div class="form-group form-floating-label">
-                  <b-form-file
-                    class="form-control input-border-bottom"
-                    v-model="$v.updateProduct.picture.$model"
-                    ref="file"
-                  ></b-form-file>
-                </div>
 
-                -->
+        <div class="form-group form-floating-label">
+          <input
+              id="picture"
+              v-model="updateProduct.picture"
+              type="text" class="form-control input-border-bottom" required>
+          <label for="picture" class="placeholder">Resim</label>
+        </div>
+
 
         <div class="form-group form-floating-label" :class="{'has-error': $v.updateProduct.name.$error}">
           <input
-            id="productName"
-            v-model="$v.updateProduct.name.$model"
-            type="text" class="form-control input-border-bottom" required>
+              id="productName"
+              v-model="$v.updateProduct.name.$model"
+              type="text" class="form-control input-border-bottom" required>
           <label for="productName" class="placeholder">Ürün Adı</label>
         </div>
 
         <div class="form-group form-floating-label">
           <input
-            id="prodcutDescription"
-            v-model="$v.updateProduct.description.$model"
-            type="text" class="form-control input-border-bottom" required>
+              id="prodcutDescription"
+              v-model="$v.updateProduct.description.$model"
+              type="text" class="form-control input-border-bottom" required>
           <label for="prodcutDescription" class="placeholder">Ürün Açıklaması</label>
         </div>
 
 
         <div class="form-group form-floating-label" :class="{'has-error': $v.updateProduct.categoryId.$error}">
           <b-form-select
-            class="form-control input-border-bottom"
-            v-model="$v.updateProduct.categoryId.$model"
-            :options="listCategory()"
+              class="form-control input-border-bottom"
+              v-model="$v.updateProduct.categoryId.$model"
+              :options="listCategory()"
           ></b-form-select>
         </div>
 
@@ -58,7 +57,8 @@ export default {
         name: null,
         description: null,
         price: null,
-        categoryId: null
+        categoryId: null,
+        picture: null
       },
       id: null
     }
@@ -74,20 +74,21 @@ export default {
         data: {
           name: this.updateProduct.name,
           description: this.updateProduct.description,
-          category: this.updateProduct.categoryId
+          category: this.updateProduct.categoryId,
+          picture: this.updateProduct.picture
         }
       }
       this.$store.dispatch("updateTravel", updateProduct)
-        .then(response => {
-          if (response) {
-            this.$refs['updateProduct'].hide()
-            this.$store.dispatch('loading', false)
-            this.$store.dispatch('alert', 'success')
-          } else {
-            this.$store.dispatch('loading', false)
-            this.$store.dispatch('alert', 'error')
-          }
-        })
+          .then(response => {
+            if (response) {
+              this.$refs['updateProduct'].hide()
+              this.$store.dispatch('loading', false)
+              this.$store.dispatch('alert', 'success')
+            } else {
+              this.$store.dispatch('loading', false)
+              this.$store.dispatch('alert', 'error')
+            }
+          })
     },
     listCategory() {
       const category = this.allCategories
@@ -112,6 +113,7 @@ export default {
       this.updateProduct.name = payload[0].name
       this.updateProduct.description = payload[0].description
       this.updateProduct.categoryId = payload[0].category.id
+      this.updateProduct.picture = payload[0].picture
       this.id = payload[0].id
       this.$refs['updateProduct'].show()
     }

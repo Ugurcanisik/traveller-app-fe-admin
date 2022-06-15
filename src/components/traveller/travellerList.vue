@@ -4,7 +4,7 @@
   <div class="card">
     <div class="card-header">
       <div class="d-flex align-items-center">
-        <ProductAdd style="margin-left: 45%" ></ProductAdd>
+        <ProductAdd style="margin-left: 45%"></ProductAdd>
       </div>
     </div>
     <div class="card-body">
@@ -12,70 +12,65 @@
 
         <span>Listele  </span>
         <b-form-select
-          id="per-page-select"
-          v-model="perPage"
-          :options="pageOptions"
-          size="sm"
-          style="width: 100px;"
+            id="per-page-select"
+            v-model="perPage"
+            :options="pageOptions"
+            size="sm"
+            style="width: 100px;"
         ></b-form-select>
 
 
         <b-form-group
-          label="Arama"
-          label-for="filter-input"
-          label-cols-sm="3"
-          label-align-sm="right"
-          label-size="sm"
-          class="mb-0"
-          style="float:right;"
+            label="Arama"
+            label-for="filter-input"
+            label-cols-sm="3"
+            label-align-sm="right"
+            label-size="sm"
+            class="mb-0"
+            style="float:right;"
         >
           <b-input-group size="sm">
             <b-form-input
-              id="filter-input"
-              v-model="filter"
-              type="search"
+                id="filter-input"
+                v-model="filter"
+                type="search"
             ></b-form-input>
 
           </b-input-group>
         </b-form-group>
 
         <b-table
-          :items="allTraveller"
-          :fields="fields"
-          :current-page="currentPage"
-          :per-page="perPage"
-          :filter="filter"
-          @filtered="onFiltered"
-          hover
-          head-variant="light"
+            :items="allTraveller"
+            :fields="fields"
+            :current-page="currentPage"
+            :per-page="perPage"
+            :filter="filter"
+            @filtered="onFiltered"
+            hover
+            head-variant="light"
         >
+
+          <template #cell(picture)="row">
+            <img :src="row.item.picture" alt="" width="100px" height="100px">
+          </template>
 
 
           <template #cell(actions)="row">
             <button
-              type="button"
-              data-toggle="tooltip" c
-              class="btn btn-link btn-primary btn-lg"
-              data-original-title="Resim Güncelle"
-              @click="updatePicture(row.item.id)"
-            >
-              <i class="icon-picture"></i>
-            </button>
-            <button
-              type="button"
-              data-toggle="tooltip" c
-              class="btn btn-link btn-primary btn-lg"
-              data-original-title="Güncelle"
-              @click="update(row.item.id)"
+                type="button"
+                data-toggle="tooltip" c
+                class="btn btn-link btn-primary btn-lg"
+                data-original-title="Güncelle"
+                @click="update(row.item.id)"
             >
               <i class="fa fa-edit"></i>
             </button>
             <button
-              type="button"
-              data-toggle="tooltip"
-              class="btn btn-link btn-danger"
-              data-original-title="Sil"
-              @click="del(row.item.id)"
+                type="button"
+                data-toggle="tooltip"
+                class="btn btn-link btn-danger"
+                data-original-title="Sil"
+                @click="del(row.item.id)"
             >
               <i class="fa fa-times"></i>
             </button>
@@ -90,11 +85,11 @@
           <span style="float: left; margin-top: 15px">{{ totalRows }} kayıttan 1 - {{ perPage }} arasındaki kayıtlar gösteriliyor</span>
 
           <b-pagination
-            style="float: right; margin-top: 15px"
-            v-model="currentPage"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            pills
+              style="float: right; margin-top: 15px"
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              pills
           ></b-pagination>
         </div>
 
@@ -158,30 +153,30 @@ export default {
       }).then((Delete) => {
         if (Delete) {
           this.$store.dispatch("deleteTravel", id)
-            .then(response => {
-              if (response) {
-                swal({
-                  title: 'Silindi!',
-                  icon: "success",
-                  type: 'success',
-                  buttons: {
-                    confirm: {
-                      className: 'btn btn-success'
+              .then(response => {
+                if (response) {
+                  swal({
+                    title: 'Silindi!',
+                    icon: "success",
+                    type: 'success',
+                    buttons: {
+                      confirm: {
+                        className: 'btn btn-success'
+                      }
                     }
-                  }
-                });
-              } else {
-                swal({
-                  title: 'Hata!',
-                  icon: "error",
-                  buttons: {
-                    confirm: {
-                      className: 'btn btn-danger'
-                    }
-                  },
-                });
-              }
-            })
+                  });
+                } else {
+                  swal({
+                    title: 'Hata!',
+                    icon: "error",
+                    buttons: {
+                      confirm: {
+                        className: 'btn btn-danger'
+                      }
+                    },
+                  });
+                }
+              })
         } else {
           swal.close();
         }
@@ -198,7 +193,7 @@ export default {
       categoryArray.push({value: null, text: 'Bir Kategori Seçiniz!', disabled: true})
 
       for (let i in category) {
-        if (category[i].isActive==true){
+        if (category[i].isActive == true) {
           categoryArray.push({value: category[i].id, text: category[i].name})
         }
       }

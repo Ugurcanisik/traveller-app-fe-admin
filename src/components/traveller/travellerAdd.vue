@@ -12,37 +12,37 @@
       <div class="modal-content">
         <div class="modal-body">
 
-          <!--
 
           <div class="form-group form-floating-label">
-            <b-form-file
-              class="form-control input-border-bottom"
-              v-model="newProduct.picture"
-            ></b-form-file>
+            <input
+                id="picture"
+                v-model="newProduct.picture"
+                type="text" class="form-control input-border-bottom" required>
+            <label for="picture" class="placeholder">Resim URL</label>
           </div>
--->
+
 
           <div class="form-group form-floating-label" :class="{'has-error': $v.newProduct.name.$error}">
             <input
-              id="productName"
-              v-model="$v.newProduct.name.$model"
-              type="text" class="form-control input-border-bottom" required>
+                id="productName"
+                v-model="$v.newProduct.name.$model"
+                type="text" class="form-control input-border-bottom" required>
             <label for="productName" class="placeholder">Ürün Adı</label>
           </div>
 
           <div class="form-group form-floating-label">
             <input
-              id="prodcutDescription"
-              v-model="$v.newProduct.description.$model"
-              type="text" class="form-control input-border-bottom" required>
+                id="prodcutDescription"
+                v-model="$v.newProduct.description.$model"
+                type="text" class="form-control input-border-bottom" required>
             <label for="prodcutDescription" class="placeholder">Ürün Açıklaması</label>
           </div>
 
           <div class="form-group form-floating-label" :class="{'has-error': $v.selected.$error}">
             <b-form-select
-              class="form-control input-border-bottom"
-              v-model="$v.selected.$model"
-              :options="listCategory()"
+                class="form-control input-border-bottom"
+                v-model="$v.selected.$model"
+                :options="listCategory()"
             ></b-form-select>
           </div>
 
@@ -71,6 +71,7 @@ export default {
         name: null,
         description: null,
         price: null,
+        picture: null
       },
     }
   },
@@ -81,6 +82,7 @@ export default {
       this.newProduct.description = null
       this.newProduct.price = null
       this.newProduct.categoryId = null
+      this.newProduct.picture = null
       this.$refs['productAdd'].show()
     },
     closeModal() {
@@ -91,19 +93,20 @@ export default {
       let newProduct = {
         name: this.newProduct.name,
         description: this.newProduct.description,
+        picture: this.newProduct.picture,
         category: this.selected
       }
       this.$store.dispatch("saveTravel", newProduct)
-        .then(response => {
-          if (response) {
-            this.$refs['productAdd'].hide()
-            this.$store.dispatch('loading', false)
-            this.$store.dispatch('alert', 'success')
-          } else {
-            this.$store.dispatch('loading', false)
-            this.$store.dispatch('alert', 'error')
-          }
-        })
+          .then(response => {
+            if (response) {
+              this.$refs['productAdd'].hide()
+              this.$store.dispatch('loading', false)
+              this.$store.dispatch('alert', 'success')
+            } else {
+              this.$store.dispatch('loading', false)
+              this.$store.dispatch('alert', 'error')
+            }
+          })
     },
     listCategory() {
       const category = this.allCategories

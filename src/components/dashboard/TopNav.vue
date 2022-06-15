@@ -11,8 +11,8 @@
             </div>
             <div class="col-7 col-stats">
               <div class="numbers">
-                <p class="card-category">Günlük Ciro</p>
-                <h4 class="card-title">{{ ciroYesterday  }}</h4>
+                <p class="card-category">Toplam Kategori</p>
+                <h4 class="card-title">{{ allCategories.length  }}</h4>
               </div>
             </div>
           </div>
@@ -30,8 +30,8 @@
             </div>
             <div class="col-7 col-stats">
               <div class="numbers">
-                <p class="card-category">Ortalama Ciro</p>
-                <h4 class="card-title">{{ ciroAverage  }}</h4>
+                <p class="card-category">Toplam Tatil</p>
+                <h4 class="card-title">{{ allTraveller.length  }}</h4>
               </div>
             </div>
           </div>
@@ -49,33 +49,33 @@
             </div>
             <div class="col-7 col-stats">
               <div class="numbers">
-                <p class="card-category">Aylık Ciro</p>
-                <h4 class="card-title">{{ ciroMonth  }}</h4>
+                <p class="card-category">Toplam User</p>
+                <h4 class="card-title">{{ allUsers.length  }}</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-      <div class="card card-stats card-round">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-5">
-              <div class="icon-big text-center">
-                <i class="flaticon-network text-danger"></i>
-              </div>
-            </div>
-            <div class="col-7 col-stats">
-              <div class="numbers">
-                <p class="card-category">Günlük Gider</p>
-                <h4 class="card-title">{{ expenseToday }}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--    <div class="col-sm-6 col-md-3">-->
+<!--      <div class="card card-stats card-round">-->
+<!--        <div class="card-body">-->
+<!--          <div class="row">-->
+<!--            <div class="col-5">-->
+<!--              <div class="icon-big text-center">-->
+<!--                <i class="flaticon-network text-danger"></i>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-7 col-stats">-->
+<!--              <div class="numbers">-->
+<!--                <p class="card-category">Günlük Gider</p>-->
+<!--                <h4 class="card-title">{{ expenseToday }}</h4>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 <script>
@@ -91,7 +91,9 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters(["allCategories"]),
+    ...mapGetters(["allTraveller"]),
+    ...mapGetters(["allUsers"]),
   },
   mounted() {
 
